@@ -9,7 +9,7 @@ const jobs = orm.define("job", {
         type: Sequelize.STRING
     },
     salary: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
     },
     description: {
         type: Sequelize.STRING
