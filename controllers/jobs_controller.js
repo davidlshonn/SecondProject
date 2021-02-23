@@ -1,45 +1,98 @@
-// const express = require("express");
-// const router = express.Router();
-const Job = require("../models/job.js");
+// this file offers a set of routes for displaying and saving data to the DB
+const express = require("express");
+const router = express.Router();
+const sequelize = require("../config/connection");
+const Job = require("../models/Job");
+const Sequelize = require("sequelize");
+const Op = Sequelize.Op;
 
-// // get job list
-// router.get("/", function (req, res){
-//     job.findAll()
-//     .then(job => res.render("jobs", {
-//         jobs
-//     })) 
-// })
-// .catch(err => res.render("error", {error: err}));
+// Get jobs list
+router.get("/", (req, res) =>
+  // Finding all jobs, and then returning them to the user as JSON.
+  // Sequelize queries are asynchronous and results are available to us inside the .then
+  Job.findAll()
+    .then((jobs) =>
+      res.render("jobs", {
+        jobs,
+      })
+    )
+    .catch((err) => res.render("error", { error: err }))
+);
 
-// // display job form
-// router.get("/add", (req, res) => res.render("add"));
+// Display add job form
+router.get("/add", (req, res) => res.render("add"));
 
-// // add a job
-// router.post("/add", (req, res) => {
-//     let { title, skills, salary, description, email_contact } = req.body;
-//     let errors = [];
-// })
+// Add a job
+router.post("/add", (req, res) => {
+  let {
+    title,
+    skills,
+    location,
+    salary,
+    description,
+    email_address,
+  } = req.body;
+  let errors = [];
 
-// Routes
-module.exports = (app) => {
-    // Get all Jobs
-    app.get('/api/all', (req, res) => {
-      // Finding all Jobs, and then returning them to the user as JSON.
-      // Sequelize queries are asynchronous and results are available to us inside the .then
-      Job.findAll({}).then((results) => res.json(results));
+  // Validate Fields
+  if (!title) {
+    errors.push({ text: "Please add a title" });
+  }
+  if (!skills) {
+    errors.push({ text: "Please add some skills" });
+  }
+  if (!location) {
+    errors.push({ text: "Please add a location" });
+  }
+  if (!description) {
+    errors.push({ text: "Please add a description" });
+  }
+  if (!email_address) {
+    errors.push({ text: "Please add a contact email" });
+  }
+
+  // Check for errors
+  if (errors.length > 0) {
+    res.render("add", {
+      errors,
+      title,
+      skills,
+      salary,
+      description,
+      email_address,
     });
-  
-    // // Add a Job
-    // app.post('/api/new', (req, res) => {
-    //   console.log('Job Data:');
-    //   console.log(req.body);
-  
-    //   Job.create({
-    //     author: req.body.author,
-    //     body: req.body.body,
-    //     created_at: req.body.created_at,
-    //     // `results` here would be the newly created Job
-    //   }).then((results) => res.json(results));
-    // });
-  };
-  
+  } else {
+    if (!salary) {
+      salary = "Unknown";
+    } else {
+      salary = `£${salary}`;
+    }
+
+    // Make lowercase and remove space after comma
+    // skills = skills.toLowerCase().replace(/,[ ]+/g, ',');
+    // Insert into table
+    Job.create({
+      title,
+      skills,
+      location,
+      description,
+      salary,
+      email_address,
+    })
+      .then((job) => res.redirect("/jobs"))
+      .catch((err) => res.render("error", { error: err.message }));
+  }
+});
+
+// Search for jobs
+router.get("/search", (req, res) => {
+  let { term } = req.query;
+
+  // Make lowercase
+  //   term = term.toLowerCase();
+  Job.findAll({ where: { skills: { [Op.like]: "%" + term + "%" } } })
+    .then((jobs) => res.render("jobs", { jobs }))
+    .catch((err) => res.render("error", { error: err }));
+});
+
+module.exports = router;
