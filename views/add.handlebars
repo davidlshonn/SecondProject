@@ -1,0 +1,42 @@
+<section id="add" class="container">
+    <div class="form-wrap">
+      <h1>Add A job</h1>
+      <p>Your contact email will be shared with registered users to apply to your job</p>
+      {{#each errors}}
+        <div class="error">
+          <p>{{text}}</p>
+        </div>
+      {{/each}}
+      <form action="/jobs/add" method="POST">
+        <div class="input-group">
+          <label for="title">job Title</label>
+          <input type="text" name="title" id="title" class="input-box" placeholder="eg. Small Wordpress website, React developer"
+            maxlength="100" value={{title}}>
+        </div>
+        <div class="input-group">
+          <label for="skills">skills Needed</label>
+          <input type="text" name="skills" id="skills" class="input-box" placeholder="eg. javascript, react, PHP"
+          maxlength="100" value={{skills}}>
+        </div>
+        <div class="input-group">
+          <label for="location">Location</label>
+          <input type="text" name="location" id="location" class="input-box" placeholder="eg. manchester, liverpool, london"
+          maxlength="100" value={{location}}>
+        </div>
+        <div class="input-group">
+          <label for="salary">salary (Leave blank for unknown)</label>
+          <input type="number" name="salary" id="salary" class="input-box" placeholder="eg. 500, 5000, 10000" value={{salary}}>
+        </div>
+        <div class="input-group">
+          <label for="description">job Description</label>
+          <textarea name="description" id="description" class="input-box" placeholder="Describe the details of the job"
+            rows="10">{{description}}</textarea>
+        </div>
+        <div class="input-group">
+          <label for="salary">Contact Email</label>
+          <input type="email" name="email_address" id="contactemail" class="input-box" placeholder="Enter an email" value={{email_address}}>
+        </div>
+        <input type="submit" value="Add job" class="btn btn-reverse">
+      </form>
+    </div>
+  </section>
