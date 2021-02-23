@@ -1,32 +1,53 @@
+<!--Standard HTML Markup-->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
-    crossorigin="anonymous">
-  <link rel="stylesheet" href="/css/style.css">
-  <title>DevJob</title>
-</head>
-<body>
-  <header>
-    <h2><a href="/"><i class="fas fa-code"></i>
-        DevJob</a></h2>
-    <nav>
-      <ul>
-        <li>
-          <a href="/">Home</a>
-        </li>
-        <li>
-          <a href="/jobs">All jobs</a>
-        </li>
-        <li>
-          <a href="/jobs/add">Add job</a>
-        </li>
-      </ul>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DevJobs</title>
+    <!--links to external stylesheets-->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="/public/assets/css/style.css" />
+  </head>
+<!--Navbar-->
+  <body>
+    <nav class="navbar navbar-light navbar-expand-lg" id = "nav-bar" style = "background-color: #e3f2fd;">
+      <a class="navbar-brand" href="/">DevJobs</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon" id = "toggle-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="/jobs">View Jobs</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="jobs/add">Post a Job</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Sign In</a>
+          </li>
+        </ul>
+      </div>
     </nav>
-  </header>
-  {{{body}}}
-</body>
+    {{{body}}}
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  </body>
 </html>
