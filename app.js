@@ -1,52 +1,41 @@
-// const express = require("express");
-// const bodyParser = require("body-parser");
-// const exphbs = require("express-handlebars");
-// const path = require("path");
+const express = require("express");
+const exphbs = require("express-handlebars");
+const bodyParser = require("body-parser");
+const path = require("path");
 
-// const Sequelize = require("sequelize");
+// Database
+const sequelize = require("./config/connection");
 
-// // Database
-// const db = require("./config/connection.js");
-
-// const app = express();
-
-// // Set static folder
-// app,use(express.static("public"));
-
-// // Body parser
-// app.use(bodyParser.urlencoded({extended: false}));
-
-// // Handlebars
-// app.engine("handlebars", exphbs({defaultLayout: "main"}));
-// app.set("view engine", "handlebars");
-
-// const routes = require("./controllers/jobs_controller.js");
-
-// // Jobs routes
-// app.use("/", routes);
-
-// const PORT = process.env.PORT || 8080;
-
-// app.listen(PORT, console.log(`server listening on port ${PORT}`));
-
-// Server.js - This file is the initial starting point for the Node/Express server.
-
-// Dependencies
-const express = require('express');
-
-// Sets up the Express App
+// Test DB
+sequelize
+  .authenticate()
+  .then(() => console.log("Database connected..."))
+  .catch((err) => console.log("Error: " + err));
 const app = express();
-const PORT = process.env.PORT || 8080;
 
-// Sets up the Express app to handle data parsing
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+// Handlebars
+app.engine(
+  "handlebars",
+  exphbs({
+    defaultLayout: "main",
+    runtimeOptions: {
+      allowProtoPropertiesByDefault: true,
+      allowProtoMethodsByDefault: true,
+    },
+  })
+);
+app.set("view engine", "handlebars");
 
-// Static directory
-app.use(express.static('public'));
+// Body Parser
+app.use(express.urlencoded({ extended: false }));
 
-// Routes
-require('./controllers/jobs_controller.js')(app);
+// Set static folder
+app.use(express.static(path.join(__dirname, "public")));
 
-// Starts the server to begin listening
-app.listen(PORT, () => console.log(`Listening on PORT ${PORT}`));
+// Index route
+app.get("/", (req, res) => res.render("index", { layout: "landing" }));
+
+// Jobs routes
+app.use("/jobs", require("./controllers/jobs_controller"));
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, console.log(`Server listening on port ${PORT}`));
