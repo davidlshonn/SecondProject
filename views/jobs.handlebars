@@ -1,17 +1,62 @@
-{{!navbar}}
-<nav class="navbar navbar-light bg-light">
-  <span class="navbar-brand mb-0 h1">DevJobs</span>
-</nav>
-{{!Job Cards}}
-<section id="jobs" class="py-5 text-center container">
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DevJobs</title>
+    <!--links to external stylesheets-->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+     <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
+<nav class="navbar navbar-light navbar-expand-lg" id = "nav-bar" style = "background-color: #e3f2fd;">
+      <a class="navbar-brand" href="/">DevJobs</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon" id = "toggle-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="/jobs">View Jobs</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="jobs/add">Post a Job</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Sign In</a>
+          </li>
+        </ul>
+      </div>
+    </nav>  
+
+<section id="search" class="py-5 text-center container">
   <div class="row py-lg-5">
     <div class="col-lg-6 col-md-8 mx-auto">
-      <form class="form-inline">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        <h2>Find A Job</h2><br>
+      <form action="/jobs/search" class="form-inline d-flex justify-content-center">
+        <input class="form-control mr-sm-2" name="term" type="search" placeholder="HTML, Javascript, React, Typescript, etc..." aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" value="search">Search</button>
       </form>
-      <h1 class="fw-dark">Jobs</h1>
-      <br>
+    </div>
+  </div>
+</section>
+{{!Job Cards}}
+<section id="jobs" class="py-5 text-center container">
       <div class="d-grid gap-3">
         {{#each jobs}}
         {{!-- {{#unless this.applied}} --}}
