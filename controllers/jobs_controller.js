@@ -2,7 +2,7 @@
 const express = require("express");
 const router = express.Router();
 const sequelize = require("../config/connection");
-const Job = require("../models/Job");
+const Job = require("../models/job");
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
 
@@ -68,8 +68,6 @@ router.post("/add", (req, res) => {
       salary = `£${salary}`;
     }
 
-    // Make lowercase and remove space after comma
-    // skills = skills.toLowerCase().replace(/,[ ]+/g, ',');
     // Insert into table
     Job.create({
       title,
@@ -85,14 +83,19 @@ router.post("/add", (req, res) => {
 });
 
 // Search for jobs
-router.get("/search", (req, res) => {
+router.get('/search', (req, res) => {
   let { term } = req.query;
 
-  // Make lowercase
-  //   term = term.toLowerCase();
-  Job.findAll({ where: { skills: { [Op.like]: "%" + term + "%" } } })
-    .then((jobs) => res.render("jobs", { jobs }))
-    .catch((err) => res.render("error", { error: err }));
+  Job.findAll({
+      where: {
+          [Op.or]: [
+              { skills: { [Op.like]: '%' + term + '%' } },
+              { location: { [Op.like]: '%' + term + '%' } },
+              { title: { [Op.like]: '%' + term + '%' } }
+          ]
+      }
+  }).then(jobs => res.render('jobs', { jobs }))
+      .catch(err => res.render('error', { error: err }));
 });
 
 module.exports = router;
