@@ -2,21 +2,48 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8">
-	<link rel="stylesheet" href="/public/assets/css/style.css" type="text/css" />
-	<title>Job Application</title>
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-		integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
-		integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-	<link rel="stylesheet" href="assets/css/style.css" />	
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+    integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+  {{!-- Darkmode widget --}}
+  <script>
+    function addDarkmodeWidget() {
+      new Darkmode().showWidget();
+    }
+    window.addEventListener('load', addDarkmodeWidget);
+  </script>
+
+
+  <link rel="stylesheet" href="/public/css/style.css">
+  <title>DevJob</title>
 </head>
 
 <body>
-	
-	{{{ body }}}
-	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-	<script src="/js/script.js"></script>
+  <header class="inner">
+    <h2><a href="/"><i class="fas fa-search-dollar"></i>
+        D.E.V Jobs</a></h2>
+    <nav>
+      <ul>
+        <li>
+          <a href="/">Home</a>
+        </li>
+        <li>
+          <a href="/jobs">Browse jobs</a>
+        </li>
+        <li>
+          <a href="/jobs/add">Add job</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="container">
+    {{{body}}}
+  </div>
 </body>
 
 </html>
