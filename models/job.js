@@ -30,16 +30,5 @@ const Job = sequelize.define('job', {
     console.log('table created');
 });
 
-// Job.sync({force: true}).then(function(){
-//     Job.create({
-//         title: "Software Developer",
-//         skills: "HTML, Javascript, CSS",
-//         salary: 25000,
-//         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-//         location: "Manchester",
-//         email_address: "user1@mail.com"
-//     })
-// });
-
 //Makes the job model available for all other files and will also create a table
 module.exports = Job;
