@@ -49,7 +49,7 @@ a:hover {
 .container h1{
     text-align: center;
     font-family: sans-serif;
-    margin-top: 20%;
+    margin-top: 13%;
 }
 
 .container .form-wrap {
@@ -214,7 +214,7 @@ input[type='search'] {
   border-radius: 5px;
   border: 1px solid var(--primary-color);
   box-shadow: var(--box-shadow);
-  margin-top: 20%;
+  margin-top: 13%;
 }
 
 .form-wrap.reg-form,
@@ -311,6 +311,8 @@ footer {
 @media (max-width: 500px) {
   .container {
     padding: 1rem;
+    margin-top: 20%;
+    margin-bottom: 20%;
   }
 
   header nav li {
@@ -337,6 +339,8 @@ footer {
   .form-wrap.reg-form,
   .form-wrap.login-form {
     width: 100%;
+    margin-top: 20%;
+    margin-bottom: 20%;
   }
 
   footer {
